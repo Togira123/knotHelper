@@ -30,9 +30,14 @@ module.exports = {
                 }
             } else if (!args.length) {
                 const allWords = await database.BannedWords.findAll()
+                const allListed = allWords.map(w => {
+                    return w.word
+                })
                 const bannedWords = new Discord.MessageEmbed()
-                    .setDescription(allWords.join(', '))
+                    .setDescription(allListed.join(', '));
+                await message.channel.send(bannedWords)
             }
+
         }
         Bl(message, args)
     }
