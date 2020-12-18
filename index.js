@@ -61,8 +61,60 @@ client.once('ready', () => {
 const modList = ['424510595702718475', '598758042049314847', '229299825072537601']
 const helperList = ['224837900536250369']
 
+const autoBanned = new Set();
 
 client.on('message', message => {
+    //check for banned words
+    if (message.author.bot) return;
+
+    const Check = async (message) => {
+        const bannedWord = await database.BannedWords.findAll()
+        bannedWord.forEach(async w => {
+            if (message.content.includes(w.word)) {
+                if (autoBanned.has(message.author.id)) {
+                    //mute
+                    autoBanned.delete(message.author.id)
+                    const user = message.guild.member(message.author.id)
+                    const role = message.guild.roles.cache.find(role => role.name === 'muted');
+                    user.roles.add(role);
+                    const isMuted = await database.Mutes.findOne({ where: { id: userMute.id } })
+                    if (!isMuted) {
+                        const timeToWait = Number(Date.now() + inMS)
+                        await database.Mutes.create({
+                            id: userMute.id,
+                            time: 900000,
+                            moderator: 'auto mod'
+                        });
+
+                        const modLog = client.channels.cache.get('788098283368611891')
+
+                        const muteEmbed = new Discord.MessageEmbed()
+                            .setColor('#4b4949')
+                            .setAuthor('User muted')
+                            .addFields(
+                                { name: 'User', value: `<@${message.author.id}> - ${message.author.id}`, inline: true },
+                                { name: 'Moderator', value: `<@789242848527777813> - 789242848527777813`, inline: true },
+                                { name: 'Time', value: '15 minutes' },
+                                { name: 'Reason', value: 'Used too many blacklisted words within a short period of time!' }
+                            )
+                            .setTimestamp();
+
+                        await modLog.send(muteEmbed)
+
+                    }
+                } else {
+                    autoBanned.add(message.author.id)
+                    setTimeout(() => autoBanned.delete(message.author.id), 60000);
+                    await message.channel.send('Please use appropriate language or you will get muted')
+                }
+                await message.delete()
+
+                return;
+            }
+        })
+    }
+    Check(message)
+
     if (!modList.includes(message.author.id) && !helperList.includes(message.author.id)) return;
     const args = message.content.slice(config.prefix.length).trim().split(' ');
     const commandName = args.shift().toLowerCase();
