@@ -4,7 +4,6 @@ const Discord = require('discord.js')
 module.exports = {
     name: 'bl',
     description: 'blacklist a word which will get auto-deleted when used.',
-    args: true,
     execute(message, args) {
         const Bl = async (message, args) => {
             if (args[0] === 'add') {

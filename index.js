@@ -77,11 +77,11 @@ client.on('message', message => {
                     const user = message.guild.member(message.author.id)
                     const role = message.guild.roles.cache.find(role => role.name === 'muted');
                     user.roles.add(role);
-                    const isMuted = await database.Mutes.findOne({ where: { id: userMute.id } })
+                    const isMuted = await database.Mutes.findOne({ where: { id: message.author.id } })
                     if (!isMuted) {
                         const timeToWait = Number(Date.now() + 900000)
                         await database.Mutes.create({
-                            id: userMute.id,
+                            id: message.author.id,
                             time: timeToWait,
                             moderator: 'auto mod'
                         });
