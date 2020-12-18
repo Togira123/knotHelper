@@ -24,8 +24,7 @@ function sleep(ms) {
 
 client.once('ready', () => {
     const channel = client.channels.cache.get('746047347783368754');
-    //channel.send('I am online')
-    console.log(Date.now())
+    channel.send('I am online')
 
     const LoopFunction = async () => {
 
@@ -53,7 +52,6 @@ client.once('ready', () => {
                     await modLog.send(muteEmbed)
                 }
             })
-            console.log('done')
             await sleep(30000)
         }
     }
@@ -90,17 +88,4 @@ client.on('message', message => {
         channel.send(`Error while trying to execute ${commandName}...`)
     }
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
 client.login(config.token)

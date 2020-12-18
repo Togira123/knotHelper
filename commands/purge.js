@@ -13,12 +13,11 @@ module.exports = {
 
             const modLog = message.client.channels.cache.get('788098283368611891')
 
-
             const WarnEmbed = new Discord.MessageEmbed()
                 .setColor('#2d6b09')
                 .setAuthor('Messages purged')
                 .addFields(
-                    { name: 'Channel', value: `${message.channel.name} - ${message.channel.id}`, inline: true },
+                    { name: 'Channel', value: `#${message.channel.name} - ${message.channel.id}`, inline: true },
                     { name: 'Moderator', value: `<@${message.author.id}> - ${message.author.id}`, inline: true },
                     { name: 'Amount', value: count }
                 )

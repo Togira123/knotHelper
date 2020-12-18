@@ -11,10 +11,7 @@ module.exports = {
                 user = `<@${args[0]}>`
             }
             const user1 = args.shift()
-            const logUser1 = user1.replace('<', '');
-            const logUser2 = logUser1.replace('>', '')
-            const logUser3 = logUser2.replace('!', '')
-            const logUser = logUser3.replace('@', '')
+            const logUser = user1.replace(/<|>|!|@/g, '');
             
 
             const reason = args.join(' ')

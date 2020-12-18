@@ -11,12 +11,8 @@ module.exports = {
             if (!user) {
                 user = `<@${args[0]}>`
             }
-            console.log(user)
             const user1 = args.shift()
-            const logUser1 = user1.replace('<', '');
-            const logUser2 = logUser1.replace('>', '')
-            const logUser3 = logUser2.replace('!', '')
-            const logUser = logUser3.replace('@', '')
+            const logUser = user1.replace(/<|>|!|@/g, '');
             console.log(logUser)
 
             let reason = args.join(' ')
@@ -28,7 +24,6 @@ module.exports = {
             if (!userKick) {
                 const user = message.client.users.cache.get(logUser)
                 userKick = message.guild.member(user)
-                console.log(userKick)
             }
             try {
                 const staffList = ['424510595702718475', '598758042049314847', '229299825072537601', '224837900536250369']
@@ -37,7 +32,7 @@ module.exports = {
             } catch (error) {
                 console.log(error)
                 const channel = message.client.channels.cache.get('746047347783368754');
-                await channel.send(`Error while trying kick...`)
+                await channel.send(`Error while trying to kick...`)
                 return;
             }
 

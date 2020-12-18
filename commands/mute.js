@@ -12,11 +12,7 @@ module.exports = {
                 user = `<@${args[0]}>`
             }
             const user1 = args.shift()
-            const logUser1 = user1.replace('<', '');
-            const logUser2 = logUser1.replace('>', '')
-            const logUser3 = logUser2.replace('!', '')
-            const logUser = logUser3.replace('@', '')
-
+            const logUser = user1.replace(/<|>|!|@/g, '');
 
             const time = args[0]
             args.shift()
@@ -32,7 +28,6 @@ module.exports = {
             let userDM;
             try {
                 const role = message.guild.roles.cache.find(role => role.name === 'muted');
-                console.log(userMute)
                 userMute.roles.add(role);
                 let inMS;
                 if (time.endsWith('s') || time.endsWith('S')) {
