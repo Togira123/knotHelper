@@ -79,10 +79,10 @@ client.on('message', message => {
                     user.roles.add(role);
                     const isMuted = await database.Mutes.findOne({ where: { id: userMute.id } })
                     if (!isMuted) {
-                        const timeToWait = Number(Date.now() + inMS)
+                        const timeToWait = Number(Date.now() + 900000)
                         await database.Mutes.create({
                             id: userMute.id,
-                            time: 900000,
+                            time: timeToWait,
                             moderator: 'auto mod'
                         });
 
