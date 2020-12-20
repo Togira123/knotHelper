@@ -17,7 +17,7 @@ module.exports = {
             const reason = args.join(' ')
 
             //mod log channel
-            const modLog = message.client.channels.cache.get('788098283368611891')
+            const modLog = await message.client.channels.fetch('788098283368611891')
 
             const WarnEmbed = new Discord.MessageEmbed()
                 .setColor('#e0dc08')

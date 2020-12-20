@@ -21,7 +21,7 @@ module.exports = {
 
             let userBan = message.mentions.members.first()
             if (!userBan) {
-                const user = message.client.users.cache.get(logUser)
+                const user = await message.client.users.fetch(logUser)
                 userBan = message.guild.member(user)
             }
             try {

@@ -21,7 +21,7 @@ module.exports = {
 
             let userMute = message.mentions.members.first()
             if (!userMute) {
-                const user = message.client.users.cache.get(logUser)
+                const user = await message.client.users.fetch(logUser)
                 userMute = message.guild.member(user)
             }
             let timeType;

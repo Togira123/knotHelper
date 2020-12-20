@@ -22,7 +22,7 @@ module.exports = {
 
             let userKick = message.mentions.members.first()
             if (!userKick) {
-                const user = message.client.users.cache.get(logUser)
+                const user = await message.client.users.fetch(logUser)
                 userKick = message.guild.member(user)
             }
             try {
