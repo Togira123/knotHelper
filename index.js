@@ -24,7 +24,7 @@ function sleep(ms) {
 
 client.once('ready', () => {
     const channel = client.channels.cache.get('746047347783368754');
-    channel.send('I am online')
+    //channel.send('I am online')
 
     const LoopFunction = async () => {
 
@@ -115,13 +115,17 @@ client.on('message', message => {
     }
     Check(message)
 
-    if (!modList.includes(message.author.id) && !helperList.includes(message.author.id)) return;
+
     const args = message.content.slice(config.prefix.length).trim().split(' ');
     const commandName = args.shift().toLowerCase();
 
     if (!client.commands.has(commandName)) return;
 
     const command = client.commands.get(commandName);
+
+    if (!command.everyone) {
+        if (!modList.includes(message.author.id) && !helperList.includes(message.author.id)) return;
+    }
 
     if (command.modOnly) {
         if (!modList.includes(message.author.id)) return;
