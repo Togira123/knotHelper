@@ -6,7 +6,7 @@ module.exports = {
     modOnly: true,
     args: true,
     execute(message, args) {
-        const Kick = async (message, args) => {
+        const Ban = async (message, args) => {
             let user = message.mentions.users.first();
             if (!user) {
                 user = `<@${args[0]}>`
@@ -52,7 +52,7 @@ module.exports = {
 
             await message.channel.send(`${user} has been banned for **${reason}**`);
         }
-        Kick(message, args)
+        Ban(message, args)
     }
 
 }
