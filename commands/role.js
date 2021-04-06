@@ -6,7 +6,7 @@ module.exports = {
     execute(message, args) {
         const GiveRole = async () => {
             if (args[0] !== 'updates') {
-                return message.channel.send('The only available role you can get righ now is `updates`')
+                return message.channel.send('The only available role you can get right now is `updates`')
             }
             const member = message.member
             const role = message.guild.roles.cache.find(r => r.name === args[0]);
