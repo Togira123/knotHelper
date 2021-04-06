@@ -45,14 +45,15 @@ client.once('ready', () => {
                         .setAuthor('User unmuted')
                         .addFields(
                             { name: 'User', value: `<@${p.id}> - ${p.id}`, inline: true },
-                            { name: 'Moderator', value: `<@${p.moderator}> - ${p.moderator}`, inline: true },
+                            { name: 'Moderator', value: `<@789242848527777813> - 789242848527777813`, inline: true },
+                            { name: 'Reason', value: 'Time is up' }
                         )
                         .setTimestamp();
 
                     await modLog.send(muteEmbed)
                 }
             })
-            await sleep(30000)
+            await sleep(10000)
         }
     }
     LoopFunction()
