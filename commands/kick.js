@@ -22,8 +22,12 @@ module.exports = {
 
             let userKick = message.mentions.members.first()
             if (!userKick) {
-                const user = await message.client.users.fetch(logUser)
-                userKick = message.guild.member(user)
+                try {
+                    const user = await message.client.users.fetch(logUser)
+                    userKick = message.guild.member(user)
+                } catch {
+                    message.channel.send('User not found!')
+                }
             }
             try {
                 const staffList = ['424510595702718475', '598758042049314847', '229299825072537601', '224837900536250369']
@@ -31,8 +35,7 @@ module.exports = {
                 await userKick.kick(reason)
             } catch (error) {
                 console.log(error)
-                const channel = message.client.channels.cache.get('746047347783368754');
-                await channel.send(`Error while trying to kick...`)
+                await message.channel.send(`Error while trying to kick...`)
                 return;
             }
 

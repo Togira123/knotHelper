@@ -21,8 +21,12 @@ module.exports = {
 
             let userMute = message.mentions.members.first()
             if (!userMute) {
-                const user = await message.client.users.fetch(logUser)
-                userMute = message.guild.member(user)
+                try {
+                    const user = await message.client.users.fetch(logUser)
+                    userMute = message.guild.member(user)
+                } catch {
+                    message.channel.send('User not found!')
+                }
             }
             let timeType;
             let userDM;
@@ -68,8 +72,7 @@ module.exports = {
 
             } catch (error) {
                 console.log(error)
-                const channel = message.client.channels.cache.get('746047347783368754');
-                await channel.send(`Error while trying to mute...`)
+                await message.channel.send(`Error while trying to mute...`)
                 return;
             }
 
