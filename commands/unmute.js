@@ -29,6 +29,10 @@ module.exports = {
                 }
             }
             const reason = args.join(' ')
+            if (!reason) {
+                message.channel.send('Provide a reason');
+                return;
+            }
 
             //check if the user is muted
             const userFound = await database.Mutes.findOne({ where: { id: userUnmute.id } })
