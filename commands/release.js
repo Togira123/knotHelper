@@ -1,8 +1,8 @@
 const Discord = require('discord.js')
 
 module.exports = {
-    name: 'lockdown',
-    description: 'locks the whole server',
+    name: 'release',
+    description: 'release the whole server from lockdown',
     modOnly: true,
 
     execute(message, args) {
