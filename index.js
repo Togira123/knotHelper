@@ -116,6 +116,7 @@ client.on('message', message => {
     }
     Check(message)
 
+    if (!message.content.startsWith(config.prefix)) return;
 
     const args = message.content.slice(config.prefix.length).trim().split(' ');
     const commandName = args.shift().toLowerCase();
