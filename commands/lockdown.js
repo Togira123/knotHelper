@@ -13,7 +13,7 @@ module.exports = {
          */
         const lockdown = async(message, args) => {
             try {
-                await message.guild.roles.everyone.setPermissions(['VIEW_CHANNEL']);
+                await message.guild.roles.everyone.setPermissions(['VIEW_CHANNEL', 'READ_MESSAGE_HISTORY']);
                 message.guild.channels.cache.forEach(async c => {
                     if (c.type === 'text') {
                         await c.send('server lockdown! You will be notified when it\'s unlocked again!')
